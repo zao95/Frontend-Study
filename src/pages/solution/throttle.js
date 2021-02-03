@@ -3,28 +3,22 @@ import Link from "next/link";
 import styles from "../../styles/solution/throttle.module.sass";
 
 const Main = () => {
-    const throttle = () => {
-        // 쓰로틀링과 디바운스를 체크하기 위한 변수를 만들어줍니다.
-        let throttleCheck
-
-        return {
-            // throttle과 debounce 모두 실행할 콜백 함수와 실행할 주기를 인자로 받습니다.
-            throttle(callback, milliseconds) {
-                return function () {
-                    if (!throttleCheck) {
-                        // setTimeout을 이용하여 설정한 주기마다 콜백이 실행될 수 있도록 하였고,
-                        // 실행이 끝난 후에는 다시 throttleCheck를 false로 만들어 주어, 설정한 주기마다 이벤트가 한 번씩만 호출되도록 하였습니다.
-                        throttleCheck = setTimeout(() => {
-                        callback(...arguments);
-                        throttleCheck = false;
-                        }, milliseconds);
-                    }
-                }
+    // 쓰로틀링과 디바운스를 체크하기 위한 변수를 만들어줍니다.
+    let throttleCheck
+    // throttle과 debounce 모두 실행할 콜백 함수와 실행할 주기를 인자로 받습니다.
+    const throttle = (callback, milliseconds) => {
+        return () => {
+            if (!throttleCheck) {
+                // setTimeout을 이용하여 설정한 주기마다 콜백이 실행될 수 있도록 하였고,
+                // 실행이 끝난 후에는 다시 throttleCheck를 false로 만들어 주어, 설정한 주기마다 이벤트가 한 번씩만 호출되도록 하였습니다.
+                throttleCheck = setTimeout(() => {
+                    callback(...arguments)
+                    throttleCheck = false
+                }, milliseconds)
             }
         }
     }
-    // const throttleObject = throttle()
-    const throttleFunc = throttle().throttle(() => {
+    const throttleFunc = throttle(() => {
         console.log("scroll!")
     }, 300);
     const handleScroll = () => {
