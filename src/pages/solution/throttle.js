@@ -1,10 +1,12 @@
-import Head from "next/head";
-import Link from "next/link";
-import styles from "../../styles/solution/throttle.module.sass";
+import Head from "next/head"
+import Link from "next/link"
+import styles from "../../styles/solution/throttle.module.sass"
+import { useState } from "react"
 
-const Main = () => {
+const Throttle = () => {
     // 쓰로틀링과 디바운스를 체크하기 위한 변수를 만들어줍니다.
     let throttleCheck
+    const [contents, setContents] = useState("")
     // throttle과 debounce 모두 실행할 콜백 함수와 실행할 주기를 인자로 받습니다.
     const throttle = (callback, milliseconds) => {
         return () => {
@@ -19,11 +21,22 @@ const Main = () => {
         }
     }
     const throttleFunc = throttle(() => {
+        setContents(`${contents} scroll`)
         console.log("scroll!")
-    }, 300);
+    }, 300)
     const handleScroll = () => {
         throttleFunc()
-    };
+    }
+    return (
+        <div className={styles.wrap} onScroll={handleScroll}>
+            <div className={styles.inBox}>
+                {contents}
+            </div>
+        </div>
+    )
+}
+
+const Main = () => {
     return (
         <div>
         <Head>
@@ -120,12 +133,10 @@ const Main = () => {
             <p>To Main Page</p>
             </Link>
             <div>Throttle Solution</div>
-            <div className={styles.wrap} onScroll={handleScroll}>
-            <div className={styles.inBox} />
-            </div>
+            <Throttle />
         </main>
         </div>
-    );
-};
+    )
+}
 
 export default Main;
