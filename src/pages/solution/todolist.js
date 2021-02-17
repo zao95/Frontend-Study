@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-const Main = () =>{
+const TodoList = () =>{
     return (
         <div>
             <Head>
@@ -35,7 +35,7 @@ const Main = () =>{
             </Head>
 
             <main>
-                <Link href="/"><p>To Main Page</p></Link>
+                <Link href="/"><p className="link">To Main Page</p></Link>
                 <div>Todo List Solution</div>
                 <div id="InfiniteScroll"></div>
             </main>
@@ -43,4 +43,4 @@ const Main = () =>{
     )
 }
 
-export default Main
+export default TodoList

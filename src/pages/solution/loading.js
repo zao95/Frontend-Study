@@ -1,7 +1,40 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import axios from 'axios'
+import styles from "../../styles/solution/loading.module.sass"
+import { useState, useRef } from 'react'
+import { getRandomInt } from "../../utils/utils"
 
-const AsyncSearch = () =>{
+const Loading = () => {
+    const [contents, setContents] = useState("")
+    const textInput = useRef(null)
+    const loadingButton = useRef(null)
+
+    const handleClick = async () => {
+        const animationClass = `loading${getRandomInt(0, 15)}`
+        loadingButton.current.classList.add(animationClass, "playAnimation")
+        loadingButton.current.value = ""
+        const response = await axios.get(`${window.location.origin}/api/test?input=${textInput.current.value}`)
+        const data = response.data.contents
+        data && setContents(`${contents}\n${data}`)
+        loadingButton.current.classList.remove(animationClass, "playAnimation")
+        loadingButton.current.value = "Button"
+    }
+
+    return (
+        <div>
+            <div className={styles.inputWrap}>
+                <input ref={textInput} type="text" placeholder="Input any text" className={styles.textInput} />
+                <input ref={loadingButton} type="button" value="Button" onClick={handleClick} className={styles.loading} />
+            </div>
+            <pre>
+                {contents}
+            </pre>
+        </div>
+    )
+}
+
+const Page = () => {
     return (
         <div>
             <Head>
@@ -31,16 +64,19 @@ const AsyncSearch = () =>{
                 <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png" />
                 <meta name="theme-color" content="#ffffff" />
                 <link href="/fonts.css" rel="stylesheet" />
-                <title>Async Search Solution</title>
+                <title>Loading Solution</title>
             </Head>
 
             <main>
                 <Link href="/"><p className="link">To Main Page</p></Link>
-                <div>Async Search Solution</div>
-                <div id="InfiniteScroll"></div>
+                <div>Loading Solution</div>
+                <p>API 호출 시 서버와 통신하는 동안,</p>
+                <p>랜덤한 로딩 이미지를 사용자에게 svg에 내장된 애니메이션으로 보여주면서</p>
+                <p>API 응답이 오면 원상태로 버튼을 보여주는 형태</p>
+                <Loading />
             </main>
         </div>
     )
 }
 
-export default AsyncSearch
+export default Page

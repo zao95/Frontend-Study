@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-const Main = () =>{
+const Sort = () =>{
     return (
         <div>
             <Head>
@@ -35,12 +35,16 @@ const Main = () =>{
             </Head>
 
             <main>
-                <Link href="/"><p>To Main Page</p></Link>
+                <Link href="/"><p className="link">To Main Page</p></Link>
                 <div>Sort Solution</div>
-                <div id="Sort"></div>
+                <di>
+                    <pre>
+                        각 정렬 방법들을 visualize해서 표현
+                    </pre>
+                </div>
             </main>
         </div>
     )
 }
 
-export default Main
+export default Sort

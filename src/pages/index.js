@@ -36,11 +36,12 @@ const Main = () =>{
 
             <main>
                 <div>Main Page</div>
-                <Link href="/solution/throttle"><p>Throttle</p></Link>
-                <Link href="/solution/infinitescroll"><p>Infinite Scroll</p></Link>
-                <Link href="/solution/todolist"><p>Todo List</p></Link>
-                <Link href="/solution/sort"><p>Sort</p></Link>
-                <Link href="/solution/asyncsearch"><p>Async Search</p></Link>
+                <Link href="/solution/throttle"><p className="link">Throttle</p></Link>
+                <Link href="/solution/infinitescroll"><p className="link">Infinite Scroll[미구현]</p></Link>
+                <Link href="/solution/todolist"><p className="link">Todo List[미구현]</p></Link>
+                <Link href="/solution/sort"><p className="link">Sort[미구현]</p></Link>
+                <Link href="/solution/asyncsearch"><p className="link">Async Search[미구현]</p></Link>
+                <Link href="/solution/loading"><p className="link">Loading</p></Link>
             </main>
         </div>
     )

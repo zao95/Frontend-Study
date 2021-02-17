@@ -21,22 +21,26 @@ const Throttle = () => {
         }
     }
     const throttleFunc = throttle(() => {
-        setContents(`${contents} scroll`)
+        setContents(`${contents}\nscroll`)
         console.log("scroll!")
     }, 300)
     const handleScroll = () => {
         throttleFunc()
     }
     return (
-        <div className={styles.wrap} onScroll={handleScroll}>
-            <div className={styles.inBox}>
-                {contents}
+        <>
+            <div className={styles.wrap} onScroll={handleScroll}>
+                <div>
+                </div>
             </div>
-        </div>
+            <pre>
+                {contents}
+            </pre>
+        </>
     )
 }
 
-const Main = () => {
+const Page = () => {
     return (
         <div>
         <Head>
@@ -130,13 +134,15 @@ const Main = () => {
 
         <main>
             <Link href="/">
-            <p>To Main Page</p>
+            <p className="link">To Main Page</p>
             </Link>
             <div>Throttle Solution</div>
+            <p>스크롤 이벤트를 일정 시간마다 작동시켜</p>
+            <p>너무 잦은 호출로 인해 랙이나 오류를 방지한다.</p>
             <Throttle />
         </main>
         </div>
     )
 }
 
-export default Main;
+export default Page
